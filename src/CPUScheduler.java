@@ -17,4 +17,7 @@ public class CPUScheduler {
         schedulingAlgorithm.simulate();
     }
 
+    public ArrayList<Process> getProcesses() {
+        return processes;
+    }
 }

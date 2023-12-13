@@ -20,7 +20,7 @@ public class Main {
             int burstTime = Integer.parseInt(scanner.nextLine());
             System.out.print("Enter the Priority of the Process: ");
             int priority = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter the Color of the Process: ");
+            System.out.print("Enter the Color of the Process: ");
             String color = scanner.nextLine();
             processes.add(new Process(processName, arrivalTime, burstTime, priority, color));
         }
@@ -30,22 +30,28 @@ public class Main {
 
         System.out.println("Shortest Job First");
         System.out.println("------------------------------------");
-        cpuScheduler.setSchedulingAlgorithm(new ShortestJobFirst());
+        cpuScheduler.setSchedulingAlgorithm(new ShortestJobFirst(cpuScheduler.getProcesses(), contextSwitchTime));
         cpuScheduler.simulate();
+        System.out.println("Press Enter to Continue....");
+        scanner.nextLine();
 
-        System.out.println("Shortest Remaining Time First");
-        System.out.println("------------------------------------");
-        cpuScheduler.setSchedulingAlgorithm(new ShortestRemainingTimeFirst());
-        cpuScheduler.simulate();
-
-        System.out.println("Priority Scheduling");
-        System.out.println("------------------------------------");
-        cpuScheduler.setSchedulingAlgorithm(new PriorityScheduling());
-        cpuScheduler.simulate();
-
-        System.out.println("AG Scheduling");
-        System.out.println("------------------------------------");
-        cpuScheduler.setSchedulingAlgorithm(new AGScheduling());
-        cpuScheduler.simulate();
+//        System.out.println("Shortest Remaining Time First");
+//        System.out.println("------------------------------------");
+//        cpuScheduler.setSchedulingAlgorithm(new ShortestRemainingTimeFirst());
+//        cpuScheduler.simulate();
+//        System.out.println("Press Enter to Continue....");
+//        scanner.nextLine();
+//
+//        System.out.println("Priority Scheduling");
+//        System.out.println("------------------------------------");
+//        cpuScheduler.setSchedulingAlgorithm(new PriorityScheduling());
+//        cpuScheduler.simulate();
+//        System.out.println("Press Enter to Continue....");
+//        scanner.nextLine();
+//
+//        System.out.println("AG Scheduling");
+//        System.out.println("------------------------------------");
+//        cpuScheduler.setSchedulingAlgorithm(new AGScheduling());
+//        cpuScheduler.simulate();
     }
 }

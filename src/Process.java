@@ -11,4 +11,24 @@ public class Process {
         this.priorityNumber = priorityNumber;
         this.color = color;
     }
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public int getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public int getBurstTime() {
+        return burstTime;
+    }
+
+    public int getPriorityNumber() {
+        return priorityNumber;
+    }
+
+    public String getColor() {
+        return color;
+    }
 }
