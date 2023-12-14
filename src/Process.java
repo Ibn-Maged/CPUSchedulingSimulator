@@ -23,9 +23,16 @@ public class Process {
     public int getBurstTime() {
         return burstTime;
     }
+    public void setBurstTime(int burstTime) {
+        this.burstTime=burstTime;
+    }
+
 
     public int getPriorityNumber() {
         return priorityNumber;
+    }
+    public void setPriorityNumber(int priorityNumber) {
+        this.priorityNumber=priorityNumber;
     }
 
     public String getColor() {

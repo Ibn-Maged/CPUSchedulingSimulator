@@ -28,19 +28,19 @@ public class Main {
         CPUScheduler cpuScheduler = new CPUScheduler(processes, RRTimeQuantum, contextSwitchTime);
         System.out.println("Press Enter to Begin Simulating....");
 
-        System.out.println("Shortest Job First");
-        System.out.println("------------------------------------");
-        cpuScheduler.setSchedulingAlgorithm(new ShortestJobFirst(cpuScheduler.getProcesses(), contextSwitchTime));
-        cpuScheduler.simulate();
-        System.out.println("Press Enter to Continue....");
-        scanner.nextLine();
-
-//        System.out.println("Shortest Remaining Time First");
+//        System.out.println("Shortest Job First");
 //        System.out.println("------------------------------------");
-//        cpuScheduler.setSchedulingAlgorithm(new ShortestRemainingTimeFirst());
+//        cpuScheduler.setSchedulingAlgorithm(new ShortestJobFirst(cpuScheduler.getProcesses(), contextSwitchTime));
 //        cpuScheduler.simulate();
 //        System.out.println("Press Enter to Continue....");
 //        scanner.nextLine();
+
+        System.out.println("Shortest Remaining Time First");
+        System.out.println("------------------------------------");
+        cpuScheduler.setSchedulingAlgorithm(new ShortestRemainingTimeFirst(cpuScheduler.getProcesses(),0,0));
+        cpuScheduler.simulate();
+        System.out.println("Press Enter to Continue....");
+        scanner.nextLine();
 //
 //        System.out.println("Priority Scheduling");
 //        System.out.println("------------------------------------");
