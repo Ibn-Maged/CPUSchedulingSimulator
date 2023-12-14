@@ -37,7 +37,7 @@ public class Main {
 
         System.out.println("Shortest Remaining Time First");
         System.out.println("------------------------------------");
-        cpuScheduler.setSchedulingAlgorithm(new ShortestRemainingTimeFirst(cpuScheduler.getProcesses(),0,0));
+        cpuScheduler.setSchedulingAlgorithm(new ShortestRemainingTimeFirst(cpuScheduler.getProcesses(),20,contextSwitchTime));
         cpuScheduler.simulate();
         System.out.println("Press Enter to Continue....");
         scanner.nextLine();
