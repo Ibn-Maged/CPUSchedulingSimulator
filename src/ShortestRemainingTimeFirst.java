@@ -9,7 +9,7 @@ public class ShortestRemainingTimeFirst implements SchedulingAlgorithm{
     int agingTIme;
     ShortestRemainingTimeFirst(ArrayList<Process> processes, int agingTime,int contextSwitching){
         this.agingTIme = agingTime;
-        this.processes = new PriorityQueue<>(new PriorityComparator());
+        this.processes = new PriorityQueue<>(new SRTFComparator());
         this.contextSwitching=contextSwitching;
         for(Process process: processes){
             process.setPriorityNumber(0);
@@ -23,7 +23,7 @@ public class ShortestRemainingTimeFirst implements SchedulingAlgorithm{
         int totalTime=0;
         while(!processes.isEmpty()) {
             Process currenProess=getNextProcess(time);
-            System.out.println(currenProess.getProcessName());
+            System.out.println("processing "+currenProess.getProcessName());
             processes.remove(currenProess);
             if(currenProess==null){
                 time++;
@@ -34,18 +34,18 @@ public class ShortestRemainingTimeFirst implements SchedulingAlgorithm{
                     addWaittingTime();
                     if(getNextProcess(time)!=null){
                         Process nextProcess=getNextProcess(time);
-                        if(nextProcess.getBurstTime()<currenProess.getBurstTime()){
+                        if(nextProcess.getBurstTime()<currenProess.getBurstTime()&&nextProcess.getPriorityNumber()>=currenProess.getPriorityNumber()){
                             if(currenProess.getBurstTime()>0){
-                                System.out.println("switching between"+currenProess.getProcessName()+" "+nextProcess.getProcessName());
+                                System.out.println("switching between "+currenProess.getProcessName()+" "+nextProcess.getProcessName());
                                 totalTime+=contextSwitching;
                                 processes.add(currenProess);
                             }
                             break;
                         }
                     }
-                    if(time%agingTIme==0){
-                        modifyPriority();
-                    }
+//                    if(time%agingTIme==0){
+//                        modifyPriority();
+//                    }
                 }
             }
             totalTime+=time;
