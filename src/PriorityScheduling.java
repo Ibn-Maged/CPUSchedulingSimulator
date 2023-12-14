@@ -22,20 +22,15 @@ public class PriorityScheduling implements SchedulingAlgorithm{
                 Process currentProcess= getNextProcess();
                 processes.remove(currentProcess);
                 time+=currentProcess.getBurstTime();
-                addWaittingTime(currentProcess.getBurstTime());
             }else{
                 time++;
             }
         }
     }
-    private void addWaittingTime(int addedTime){
-        for(Process p :processes){
-            p.setWaitingTime(p.getWaitingTime()+addedTime);
-        }
-    }
+
     private void modifyPriority(){
         for(Process p :processes){
-            if(p.getWaitingTime()>p.getBurstTime()*1.5){
+            if(time-p.getArrivalTime()>=p.getBurstTime()*1.5){
                 p.setPriorityNumber(p.getPriorityNumber()-1);
             }
         }
