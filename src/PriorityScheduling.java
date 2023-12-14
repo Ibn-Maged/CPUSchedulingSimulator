@@ -16,16 +16,28 @@ public class PriorityScheduling implements SchedulingAlgorithm{
     }
     @Override
     public void simulate() {
+        int totalWaitingTime = 0;
+        int totalTurnaroundTime = 0;
+        int numOfProcesses = processes.size();
         while(!processes.isEmpty()){
             modifyPriority();
             if(getNextProcess()!=null){
                 Process currentProcess= getNextProcess();
                 processes.remove(currentProcess);
-                time+=currentProcess.getBurstTime();
+                int turnaroundTime = time + currentProcess.getBurstTime() + contextSwitching;
+                int waitingTime = turnaroundTime - currentProcess.getBurstTime();
+                totalTurnaroundTime += turnaroundTime;
+                totalWaitingTime += waitingTime;
+                System.out.println(currentProcess.getProcessName());
+                System.out.println("Waiting Time: " + waitingTime);
+                System.out.println("Turnaround Time: " + turnaroundTime);
+                time+=currentProcess.getBurstTime() + contextSwitching;
             }else{
                 time++;
             }
         }
+        System.out.println("Average Waiting Time: " + totalWaitingTime / numOfProcesses);
+        System.out.println("Average Turnaround Time: " + totalTurnaroundTime / numOfProcesses);
     }
 
     private void modifyPriority(){
@@ -36,8 +48,14 @@ public class PriorityScheduling implements SchedulingAlgorithm{
         }
     }
     private Process getNextProcess(){
+        PriorityQueue<Process> temp= new PriorityQueue<>(new AGComparator());
         for(Process p:processes){
-            if(p.getArrivalTime()<time){
+            temp.add(p);
+        }
+
+        while(!temp.isEmpty()){
+            Process p=temp.poll();
+            if(p.getArrivalTime()<=time){
                 return p;
             }
         }

@@ -5,6 +5,8 @@ public class Process {
     private int priorityNumber;
     private int waitingTime=0;
     private String color;
+    private double quantum;
+    private int AGFactor;
     Process(String processName, int arrivalTime, int burstTime, int priorityNumber, String color){
         this.processName = processName;
         this.arrivalTime = arrivalTime;
@@ -44,5 +46,21 @@ public class Process {
 
     public String getColor() {
         return color;
+    }
+
+    public double getQuantum() {
+        return quantum;
+    }
+
+    public int getAGFactor() {
+        return AGFactor;
+    }
+
+    public void setQuantum(double quantum) {
+        this.quantum = quantum;
+    }
+
+    public void setAGFactor(int AGFactor) {
+        this.AGFactor = AGFactor;
     }
 }
