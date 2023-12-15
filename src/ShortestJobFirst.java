@@ -22,8 +22,8 @@ public class ShortestJobFirst implements SchedulingAlgorithm{
     @Override
     public void simulate() {
         int numOfProcesses = processes.size();
-        int totalWaitingTime = 0;
-        int totalTurnaroundTime = 0;
+        double totalWaitingTime = 0;
+        double totalTurnaroundTime = 0;
         while(!readyQueue.isEmpty() || !processes.isEmpty()){
             for(Process process: processes){
                 if(process.getArrivalTime() <= time){

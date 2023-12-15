@@ -16,8 +16,8 @@ public class PriorityScheduling implements SchedulingAlgorithm{
     }
     @Override
     public void simulate() {
-        int totalWaitingTime = 0;
-        int totalTurnaroundTime = 0;
+        double totalWaitingTime = 0;
+        double totalTurnaroundTime = 0;
         int numOfProcesses = processes.size();
         while(!processes.isEmpty()){
             modifyPriority();
