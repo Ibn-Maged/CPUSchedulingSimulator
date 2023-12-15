@@ -73,7 +73,7 @@ public class ShortestRemainingTimeFirst implements SchedulingAlgorithm{
         System.out.println("Average Turnaround Time: " + (totalTurnaroundTime / numOfProcesses));
     }
     private Process getNextProcess(int time){
-        PriorityQueue<Process> temp= new PriorityQueue<>(new AGComparator());
+        PriorityQueue<Process> temp= new PriorityQueue<>(new SRTFComparator());
         for(Process p:processes){
             temp.add(p);
         }

@@ -27,14 +27,14 @@ public class Main {
         }
 
         CPUScheduler cpuScheduler = new CPUScheduler(processes, 4, contextSwitchTime);
-        System.out.println("Press Enter to Begin Simulating....");
-
-        System.out.println("Shortest Job First");
-        System.out.println("------------------------------------");
-        cpuScheduler.setSchedulingAlgorithm(new ShortestJobFirst(makeCopy(cpuScheduler.getProcesses()), contextSwitchTime));
-        cpuScheduler.simulate();
-        System.out.println("Press Enter to Continue....");
-        scanner.nextLine();
+//        System.out.println("Press Enter to Begin Simulating....");
+//
+//        System.out.println("Shortest Job First");
+//        System.out.println("------------------------------------");
+//        cpuScheduler.setSchedulingAlgorithm(new ShortestJobFirst(makeCopy(cpuScheduler.getProcesses()), contextSwitchTime));
+//        cpuScheduler.simulate();
+//        System.out.println("Press Enter to Continue....");
+//        scanner.nextLine();
 
         System.out.println("Shortest Remaining Time First");
         System.out.println("------------------------------------");
@@ -43,12 +43,12 @@ public class Main {
         System.out.println("Press Enter to Continue....");
         scanner.nextLine();
 
-        System.out.println("Priority Scheduling");
-        System.out.println("------------------------------------");
-        cpuScheduler.setSchedulingAlgorithm(new PriorityScheduling(makeCopy(cpuScheduler.getProcesses()), 20, 0));
-        cpuScheduler.simulate();
-        System.out.println("Press Enter to Continue....");
-        scanner.nextLine();
+//        System.out.println("Priority Scheduling");
+//        System.out.println("------------------------------------");
+//        cpuScheduler.setSchedulingAlgorithm(new PriorityScheduling(makeCopy(cpuScheduler.getProcesses()), 20, 0));
+//        cpuScheduler.simulate();
+//        System.out.println("Press Enter to Continue....");
+//        scanner.nextLine();
 
 //        System.out.println("AG Scheduling");
 //        System.out.println("------------------------------------");

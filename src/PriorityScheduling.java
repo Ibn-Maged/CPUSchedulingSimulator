@@ -49,7 +49,7 @@ public class PriorityScheduling implements SchedulingAlgorithm{
         }
     }
     private Process getNextProcess(){
-        PriorityQueue<Process> temp= new PriorityQueue<>(new AGComparator());
+        PriorityQueue<Process> temp= new PriorityQueue<>(new PriorityComparator());
         for(Process p:processes){
             temp.add(p);
         }
