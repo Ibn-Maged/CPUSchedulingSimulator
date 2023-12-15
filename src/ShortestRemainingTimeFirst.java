@@ -34,8 +34,8 @@ public class ShortestRemainingTimeFirst implements SchedulingAlgorithm{
                 System.out.print(currentProcess.getProcessName() + " Started from " + time + " to ");
                 while(currentProcess.getBurstTime()>0){
                     currentProcess.setBurstTime(currentProcess.getBurstTime()-1);
-                    time++;
                     addWaitingTime();
+                    time++;
                     if(getNextProcess(time)!=null){
                         Process nextProcess = getNextProcess(time);
                         if(nextProcess.getBurstTime()<currentProcess.getBurstTime()&&nextProcess.getPriorityNumber()>=currentProcess.getPriorityNumber()){
