@@ -25,25 +25,29 @@ public class ShortestRemainingTimeFirst implements SchedulingAlgorithm{
         int totalTurnaroundTime = 0;
         int numOfProcesses = processes.size();
         while(!processes.isEmpty()) {
-            Process currenProess=getNextProcess(time);
-            processes.remove(currenProess);
-            if(currenProess==null){
+            Process currentProcess=getNextProcess(time);
+            processes.remove(currentProcess);
+            if(currentProcess==null){
                 time++;
             }else {
-                System.out.println("at t = " + time + " processing "+currenProess.getProcessName());
-                while(currenProess.getBurstTime()>0){
-                    currenProess.setBurstTime(currenProess.getBurstTime()-1);
+//                System.out.println("at t = " + time + " processing "+currentProcess.getProcessName());
+                System.out.print(currentProcess.getProcessName() + " Started from " + time + " to ");
+                while(currentProcess.getBurstTime()>0){
+                    currentProcess.setBurstTime(currentProcess.getBurstTime()-1);
                     time++;
-                    addWaittingTime();
+                    addWaitingTime();
                     if(getNextProcess(time)!=null){
-                        Process nextProcess=getNextProcess(time);
-                        if(nextProcess.getBurstTime()<currenProess.getBurstTime()&&nextProcess.getPriorityNumber()>=currenProess.getPriorityNumber()){
-                            if(currenProess.getBurstTime()>0){
-                                System.out.println("at t = " + time + " switching between "+currenProess.getProcessName()+" "+nextProcess.getProcessName());
+                        Process nextProcess = getNextProcess(time);
+                        if(nextProcess.getBurstTime()<currentProcess.getBurstTime()&&nextProcess.getPriorityNumber()>=currentProcess.getPriorityNumber()){
+                            if(currentProcess.getBurstTime()>0){
+                                System.out.println(time);
+//                                System.out.println("at t = " + time + " switching between "+currentProcess.getProcessName()+" "+nextProcess.getProcessName());
+                                System.out.println("Switching between " + currentProcess.getProcessName() + " " + nextProcess.getProcessName());
+//                                System.out.print(nextProcess.getProcessName() + " Started from " + time + " to ");
                                 totalTime+=contextSwitching;
                                 time+=contextSwitching;
-                                currenProess.setWaitingTime(currenProess.getWaitingTime() + contextSwitching);
-                                processes.add(currenProess);
+                                currentProcess.setWaitingTime(currentProcess.getWaitingTime() + contextSwitching);
+                                processes.add(currentProcess);
                             }
                             break;
                         }
@@ -52,12 +56,14 @@ public class ShortestRemainingTimeFirst implements SchedulingAlgorithm{
                         modifyPriority();
                     }
                 }
-                if(currenProess.getBurstTime() == 0){
-                    System.out.println("at time " + time + " " + currenProess.getProcessName() + " Finished");
-                    System.out.println("Waiting Time: " + currenProess.getWaitingTime());
-                    System.out.println("Turnaround Time: " + (time - currenProess.getArrivalTime()));
-                    totalWaitingTime += currenProess.getWaitingTime() + contextSwitching;
-                    totalTurnaroundTime += time - currenProess.getArrivalTime();
+                if(currentProcess.getBurstTime() == 0){
+//                    System.out.println("at time " + time + " " + currentProcess.getProcessName() + " Finished");
+                    System.out.println(time);
+                    System.out.println(currentProcess.getProcessName() + " Finished");
+                    System.out.println("Waiting Time: " + currentProcess.getWaitingTime());
+                    System.out.println("Turnaround Time: " + (time - currentProcess.getArrivalTime()));
+                    totalWaitingTime += currentProcess.getWaitingTime() + contextSwitching;
+                    totalTurnaroundTime += time - currentProcess.getArrivalTime();
                     time += contextSwitching;
                 }
             }
@@ -81,7 +87,7 @@ public class ShortestRemainingTimeFirst implements SchedulingAlgorithm{
         return null;
 
     }
-    private void addWaittingTime(){
+    private void addWaitingTime(){
         for(Process p :processes){
             if(p.getArrivalTime() <= time){
                 p.setWaitingTime(p.getWaitingTime()+1);

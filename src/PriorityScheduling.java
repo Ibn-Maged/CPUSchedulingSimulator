@@ -24,14 +24,15 @@ public class PriorityScheduling implements SchedulingAlgorithm{
             if(getNextProcess()!=null){
                 Process currentProcess= getNextProcess();
                 processes.remove(currentProcess);
-                int turnaroundTime = time + currentProcess.getBurstTime() + contextSwitching;
+                System.out.print(currentProcess.getProcessName() + " Started from " + time + " to ");
+                time+=currentProcess.getBurstTime() + contextSwitching;
+                System.out.println(time);
+                int turnaroundTime = time - currentProcess.getArrivalTime();
                 int waitingTime = turnaroundTime - currentProcess.getBurstTime();
                 totalTurnaroundTime += turnaroundTime;
                 totalWaitingTime += waitingTime;
-                System.out.println(currentProcess.getProcessName());
                 System.out.println("Waiting Time: " + waitingTime);
                 System.out.println("Turnaround Time: " + turnaroundTime);
-                time+=currentProcess.getBurstTime() + contextSwitching;
             }else{
                 time++;
             }

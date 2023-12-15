@@ -2,14 +2,21 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class ShortestJobFirst implements SchedulingAlgorithm{
-    PriorityQueue<Process> processes;
+    ArrayList<Process> processes;
+    PriorityQueue<Process> readyQueue;
     int time = 0;
     int contextSwitch;
     ShortestJobFirst(ArrayList<Process> processes, int contextSwitch){
         this.contextSwitch = contextSwitch;
-        this.processes = new PriorityQueue<>(new BurstTimeComparator());
+        this.processes = processes;
+        readyQueue = new PriorityQueue<>(new BurstTimeComparator());
         for(Process process: processes){
-            this.processes.add(process);
+            if(process.getArrivalTime() == 0){
+                readyQueue.add(process);
+            }
+        }
+        for(Process process: readyQueue){
+            processes.remove(process);
         }
     }
     @Override
@@ -17,16 +24,25 @@ public class ShortestJobFirst implements SchedulingAlgorithm{
         int numOfProcesses = processes.size();
         int totalWaitingTime = 0;
         int totalTurnaroundTime = 0;
-        while(!processes.isEmpty()){
-            Process currentProcess = processes.poll();
-            int turnaroundTime = time + currentProcess.getBurstTime() + contextSwitch;
+        while(!readyQueue.isEmpty() || !processes.isEmpty()){
+            for(Process process: processes){
+                if(process.getArrivalTime() <= time){
+                    readyQueue.add(process);
+                }
+            }
+            for(Process process: readyQueue){
+                processes.remove(process);
+            }
+            Process currentProcess = readyQueue.poll();
+            System.out.print(currentProcess.getProcessName() + " Started from " + time + " to ");
+            time += currentProcess.getBurstTime() + contextSwitch;
+            int turnaroundTime = time - currentProcess.getArrivalTime();
             int waitingTime = turnaroundTime - currentProcess.getBurstTime();
             totalTurnaroundTime += turnaroundTime;
             totalWaitingTime += waitingTime;
-            System.out.println(currentProcess.getProcessName());
+            System.out.println(time);
             System.out.println("Waiting Time: " + waitingTime);
             System.out.println("Turnaround Time: " + turnaroundTime);
-            time += currentProcess.getBurstTime() + contextSwitch;
         }
         System.out.println("Average Waiting Time: " + (totalWaitingTime / numOfProcesses));
         System.out.println("Average Turnaround Time: " + (totalTurnaroundTime / numOfProcesses));
