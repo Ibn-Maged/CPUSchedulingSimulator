@@ -27,14 +27,14 @@ public class Main {
         }
 
         CPUScheduler cpuScheduler = new CPUScheduler(processes, 4, contextSwitchTime);
-//        System.out.println("Press Enter to Begin Simulating....");
-//
-//        System.out.println("Shortest Job First");
-//        System.out.println("------------------------------------");
-//        cpuScheduler.setSchedulingAlgorithm(new ShortestJobFirst(makeCopy(cpuScheduler.getProcesses()), contextSwitchTime));
-//        cpuScheduler.simulate();
-//        System.out.println("Press Enter to Continue....");
-//        scanner.nextLine();
+        System.out.println("Press Enter to Begin Simulating....");
+
+        System.out.println("Shortest Job First");
+        System.out.println("------------------------------------");
+        cpuScheduler.setSchedulingAlgorithm(new ShortestJobFirst(makeCopy(cpuScheduler.getProcesses()), contextSwitchTime));
+        cpuScheduler.simulate();
+        System.out.println("Press Enter to Continue....");
+        scanner.nextLine();
 
         System.out.println("Shortest Remaining Time First");
         System.out.println("------------------------------------");
@@ -43,31 +43,31 @@ public class Main {
         System.out.println("Press Enter to Continue....");
         scanner.nextLine();
 
-//        System.out.println("Priority Scheduling");
-//        System.out.println("------------------------------------");
-//        cpuScheduler.setSchedulingAlgorithm(new PriorityScheduling(makeCopy(cpuScheduler.getProcesses()), 20, 0));
-//        cpuScheduler.simulate();
-//        System.out.println("Press Enter to Continue....");
-//        scanner.nextLine();
+        System.out.println("Priority Scheduling");
+        System.out.println("------------------------------------");
+        cpuScheduler.setSchedulingAlgorithm(new PriorityScheduling(makeCopy(cpuScheduler.getProcesses()), 20, 0));
+        cpuScheduler.simulate();
+        System.out.println("Press Enter to Continue....");
+        scanner.nextLine();
 
-//        System.out.println("AG Scheduling");
-//        System.out.println("------------------------------------");
-//        Process p1 =new Process("p1",0,17,0,"0");
-//        Process p2 =new Process("p2",3,6,0,"0");
-//        Process p3 =new Process("p3",4,10,0,"0");
-//        Process p4 =new Process("p4",29,4,0,"0");
-//
-//        p1.setAGFactor(20);
-//        p2.setAGFactor(17);
-//        p3.setAGFactor(16);
-//        p4.setAGFactor(43);
-//        processes.add(p1);
-//        processes.add(p2);
-//        processes.add(p3);
-//        processes.add(p4);
-//
-//        cpuScheduler.setSchedulingAlgorithm(new AGScheduling(processes, 4));
-//        cpuScheduler.simulate();
+        System.out.println("AG Scheduling");
+        System.out.println("------------------------------------");
+        Process p1 =new Process("p1",0,5,0,"0");
+        Process p2 =new Process("p2",0,3,0,"0");
+        Process p3 =new Process("p3",5,1,0,"0");
+        Process p4 =new Process("p4",10,7,0,"0");
+
+        p1.setAGFactor(20);
+        p2.setAGFactor(17);
+        p3.setAGFactor(16);
+        p4.setAGFactor(43);
+        processes.add(p1);
+        processes.add(p2);
+        processes.add(p3);
+        processes.add(p4);
+
+        cpuScheduler.setSchedulingAlgorithm(new AGScheduling(processes, RRTimeQuantum));
+        cpuScheduler.simulate();
     }
 
     static ArrayList<Process> makeCopy(ArrayList<Process> processes){
